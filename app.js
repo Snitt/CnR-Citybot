@@ -15,9 +15,6 @@ bot.on("message", message => {
 
     if (command === "players") {
       getCityInfo().then(data => {
-        // getResponseString(data).then(str => {
-        //   message.channel.send(str);
-        // });
         getResponseEmbed(data).then(embed => {
           message.channel.send(embed);
         });
@@ -35,17 +32,6 @@ async function getCityInfo() {
   } catch (error) {
     return Promise.reject(error);
   }
-}
-
-function getResponseString(data) {
-  if (!data)
-    return Promise.resolve("There was an error fetching the requested data.");
-  return Promise.resolve(`[ Server 1 (${data.servers[0].mapname} ${
-    data.servers[0].worldtime
-  }) Players: ${data.servers[0].players.length}/200 ] 
-  [ Server 2 (${data.servers[1].mapname} ${
-    data.servers[1].worldtime
-  }) Players: ${data.servers[1].players.length}/200]`);
 }
 
 function getResponseEmbed(data) {
